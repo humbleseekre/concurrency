@@ -10,7 +10,7 @@ pragma once
 template<typename T>
 class thread_safe_stack{
 private:
-  stack<shared_ptr<T>> stk;
+  stack<T> stk;
   mutex m;
 public:
   void push(T elem){
@@ -26,7 +26,7 @@ public:
     stk.pop();
   }
   
-  shared_ptr<T> top(){
+  T top(){
     lock_guard<mutex> lg(m);
     if(isEmpty()){
       throw runtime_error("stack is empty");
